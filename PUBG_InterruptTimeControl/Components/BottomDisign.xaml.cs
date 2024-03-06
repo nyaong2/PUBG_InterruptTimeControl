@@ -45,10 +45,6 @@ namespace PUBG_InterruptTimeControl.Components
         {
             activeUserControlEvent(new NvidiaBin());
         }
-        private void Button_FileEngine_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new FileEngine());
-        }
         private void Button_WindowsMagnifier_Click(object sender, RoutedEventArgs e)
         {
             activeUserControlEvent(new WindowsMagnifier());
@@ -60,14 +56,6 @@ namespace PUBG_InterruptTimeControl.Components
         private void Button_BeServerPath_Click(object sender, RoutedEventArgs e)
         {
             activeUserControlEvent(new BEServerChange());
-        }
-        private void Button_DatChange_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new DatChange());
-        }
-        private void Button_StartOptionProgram_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new StartOptionProgram());
         }
         private void Button_ProcessorPriority_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +78,18 @@ namespace PUBG_InterruptTimeControl.Components
             activeUserControlEvent(new Services());
         }
 
+        private void Button_DatChange_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new DatChange());
+        }
+        private void Button_FileEngine_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new FileEngine());
+        }
+        private void Button_StartOptionProgram_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new StartOptionProgram());
+        }
         #endregion
 
     }

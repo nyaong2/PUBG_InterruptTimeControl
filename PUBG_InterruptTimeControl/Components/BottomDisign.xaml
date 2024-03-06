@@ -78,7 +78,7 @@
         </GroupBox>
 
         <GroupBox Style="{StaticResource GroupBox_Red}"
-                  Width="470" Height="93"
+                  Width="470" Height="85"
                   Margin="95,440,0,0"
                   Header="위험">
             <Grid>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PUBG_InterruptTimeControl"
         mc:Ignorable="d"
-        Title="Pubg InterrupTimeControl"
+        Title="Pubg InterruptTimeControl"
         Width="680" Height="800"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Loaded="MainWindow_Loaded">
