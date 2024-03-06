@@ -79,7 +79,7 @@
 
         <GroupBox Style="{StaticResource GroupBox_Red}"
                   Width="470" Height="93"
-                  Margin="0,440,0,0"
+                  Margin="85,440,0,0"
                   Header="위험">
             <Grid>
                 <Button Style="{StaticResource BasicButton}"
