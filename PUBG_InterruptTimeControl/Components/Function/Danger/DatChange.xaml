@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="PUBG_InterruptTimeControl.Components.Function.Danger.DatChange"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PUBG_InterruptTimeControl.Components.Function.Danger"
+             mc:Ignorable="d" 
+             Width="800" Height="600"
+             Loaded="DatChange_Loaded">
+    
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label Style="{StaticResource FunctionLabel}"
+                   Margin="20"
+                   Content="안티치트 dat 파일 변경"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Label Style="{StaticResource BasicLabel}"
+                       FontSize="25" FontWeight="Bold" Foreground="Red"
+                       HorizontalAlignment="Center"
+                       Margin="0,30,0,0">
+                    <Underline>배그를 끈 상태로 진행해야 됩니다.</Underline>
+                </Label>
+            </Grid>
+            <Grid>
+                <ListBox x:Name="ListBox_Dat"
+                         Width="200" Height="100"
+                         VerticalAlignment="Top" HorizontalAlignment="Left" Margin="150,140,0,0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedIndex="0"/>
+                <Button Style="{StaticResource Basic2Button}"
+                        Height="30"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-300,10,0,0"
+                        Content="적용"
+                        Click="Button_Apply_Click"/>
+                
+                <Label Style="{StaticResource BasicLabel}"
+                       Margin="370,150,0,0"
+                       Foreground="White" FontWeight="Bold"
+                       Content="dat를 적용할 서버 : "/>
+                <Label x:Name="Label_CurrentValue"
+                       Style="{StaticResource BasicLabel}"
+                       Margin="525,149,0,0"
+                       FontSize="19" FontWeight="ExtraBold" Foreground="Red"
+                       Content="선택되지 않음"/>
+                <Label Style="{StaticResource BasicLabel}"
+                       Margin="380,192,0,0"
+                       Foreground="White" FontWeight="Bold"
+                       Content="선택 : "/>
+                <Button x:Name="Button_ServerSteam"
+                        Style="{StaticResource Basic2Button}"
+                        Width="55" Height="28"
+                        Margin="440,192,0,0"
+                        Content="스배"
+                        Click="Button_ServerSteam_Click"/>
+                <Button x:Name="Button_ServerKakao"
+                        Style="{StaticResource Basic2Button}"
+                        Width="55" Height="28"
+                        Margin="505,192,0,0"
+                        Content="카배"
+                        Click="Button_ServerKakao_Click"/>
+            </Grid>
+
+            <Grid>
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="80" Height="30"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,90"
+                        Content="원상복구"
+                        Click="Buttn_Restore_Click"/>
+                <Label Style="{StaticResource BasicLabel}"
+                       Margin="144,450,0,0"
+                       Content="원상복구 방법 : 원상복구 버튼을 누르고 배그를 껐다키면 됩니다." Foreground="White" FontWeight="Bold"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

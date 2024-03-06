@@ -1,0 +1,239 @@
+﻿<Application x:Class="PUBG_InterruptTimeControl.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PUBG_InterruptTimeControl"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+        <sys:String x:Key="ProgramVersion">1.0</sys:String>
+        
+        <SolidColorBrush x:Key="Background" Color="White"/>
+
+        <!-- Label >-->
+        <Style x:Key="FunctionLabel" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontFamily" Value="Bold"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="24"/>
+
+        </Style>
+
+        <Style x:Key="BasicLabel" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="TextBlock.FontFamily" Value="Bold"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="TextBlock.FontSize" Value="17"/>
+        </Style>
+
+        <!-- Button >-->
+        <SolidColorBrush x:Key="ButtonEdge" Color="Green"/>
+        <SolidColorBrush x:Key="ButtonColor" Color="#535353"/>
+        <SolidColorBrush x:Key="ButtonMouseOverColor" Color="#85539C"/>
+        <SolidColorBrush x:Key="Button2Color" Color="#958888"/>
+        <SolidColorBrush x:Key="Button2MouseOverColor" Color="#535f6f"/>
+        
+        <Style x:Key="BasicButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{StaticResource ButtonEdge}"
+                                CornerRadius="20"
+                                BorderThickness="2">
+                            <Border.Effect>
+                                <DropShadowEffect  BlurRadius="5" ShadowDepth="3" Opacity="0.3"/>
+                            </Border.Effect>
+
+                            <Grid>
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ButtonMouseOverColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="Basic2Button" TargetType="Button">
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Background" Value="{StaticResource Button2Color}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="White"
+                                CornerRadius="3"
+                                BorderThickness="1">
+
+                            <Grid>
+                                <Rectangle Fill="{TemplateBinding Background}">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="5" ShadowDepth="3" Opacity="0.5"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource Button2MouseOverColor}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Button_Circle">
+            <Grid>
+                <Ellipse x:Name="outerCircle" Width="40" Height="40">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush StartPoint="0,1">
+                            <GradientStop Offset="0" Color="Gray"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse x:Name="innerCircle" Width="34" Height="34" >
+                    <Ellipse.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="White"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Image Source="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}"
+                       Width="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter TargetName="innerCircle" Property="Fill" Value="#FFFFAE0F"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+        <!-- GroupBox >-->
+        <Style x:Key="GroupBox_Default" TargetType="GroupBox">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=ActualWidth}" Margin="-9, 0, -8.5, 0">
+                            <Label
+                                   Height="20"
+                                   VerticalContentAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                   Margin="-1,0" Padding="0,0,0,0"
+                                   Background="{StaticResource ButtonColor}" Foreground="White"
+                                   Content="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="GroupBox_Red" TargetType="GroupBox" BasedOn="{StaticResource GroupBox_Default}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=ActualWidth}" Margin="-9, 0, -8.5, 0">
+                            <Label
+                                   Background="Red" Foreground="White"
+                                   Height="20"
+                                   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                   Margin="-1,0" Padding="0,0,0,0"
+                                   Content="{Binding}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GroupBox_SkyBlue" TargetType="GroupBox" BasedOn="{StaticResource GroupBox_Default}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=GroupBox}, Path=ActualWidth}" Margin="-9, 0, -8.5, 0">
+                            <Label
+                                   Background="#558CCF" Foreground="White"
+                                   Height="20"
+                                   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                   Margin="-1,0" Padding="0,0,0,0"
+                                   Content="{Binding}" />
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="Grid">
+        </Style>
+        
+        <!-- ListBox-->
+        <Style x:Key="ListBoxItem_Menu" TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="#30ba96"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid x:Name="Grid" Background="Transparent"> <!-- 아래 트리거가 제대로 동작하려면 배경색 투명이어야 제대로 동작함.-->
+                            <Border x:Name="Border" Height="24"
+                                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                    Width="96">
+                            </Border>
+
+                            <ContentPresenter x:Name="ContentPresenter" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              SnapsToDevicePixels="True"/>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Grid" Property="Background" Value="#fbf6a4"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Grid" Property="Background" Value="#f9d686"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

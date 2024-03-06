@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="PUBG_InterruptTimeControl.Components.Function.CopyDisign"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PUBG_InterruptTimeControl.Components.Function"
+             mc:Ignorable="d" 
+             Width="800" Height="600">
+    
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label Style="{StaticResource FunctionLabel}"
+                   Margin="20"
+                   Content="마우스 더블클릭 속도"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="PUBG_InterruptTimeControl.Components.Function.Etc.WindowsMagnifier"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PUBG_InterruptTimeControl.Components.Function"
+             mc:Ignorable="d" 
+             Width="800" Height="600"
+             Loaded="UserControl_Loaded">
+    
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label Style="{StaticResource FunctionLabel}"
+                   Margin="20"
+                   Content="윈도우 돋보기 내레이션 속도 조절"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="230" Height="40"
+                        Margin="295,112,0,0"
+                        Content="돋보기 실행시 추가되는 기본 레지 추가"
+                        Click="Button_DefaultRegAdd_Click"/>
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="230" Height="40"
+                        Margin="295,158,0,0"
+                        Content="돋보기 실행시 추가되는 기본 레지 제거"
+                        Click="Button_DefaultRegDel_Click"/>
+            </Grid>
+                
+            <Grid>
+                <Label Style="{StaticResource BasicLabel}"
+                        Margin="275,230,0,0"
+                        Content="SpeechSpeed : " FontWeight="Bold"/>
+
+                <TextBox x:Name="TextBox_SpeechSpeed"
+                            Background="White" Foreground="Black"
+                            Width="60" Height="20"
+                            VerticalAlignment="Top" HorizontalAlignment="Left" Margin="405,235,0,0"/>
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="65" Height="45"
+                        Margin="480,223,0,0"
+                        Content="적용"
+                        Click="Button_Apply_Click"/>
+
+                <Label Style="{StaticResource BasicLabel}"
+                        Margin="246,280,0,0"
+                        Content="[기본 : 10] [최저 : 0] [최대 : 20] [추천 : 100]"/>
+            </Grid>
+
+            <Grid>
+                <Label Style="{StaticResource BasicLabel}"
+                        Margin="339,330,0,0"
+                        Content="현재 값 : " FontWeight="Bold" Foreground="#FFFFEA00"/>
+
+                <Label x:Name="Label_CurrentValue"
+                        Style="{StaticResource BasicLabel}"
+                        Margin="412,330,0,0"
+                        Content="NULL" FontWeight="Bold" Foreground="#FF00FF3E"/>
+            </Grid>
+
+            <Grid>
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="80" Height="30"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,90"
+                        Content="원상복구"
+                        Click="Buttn_Restore_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PUBG_InterruptTimeControl", "PUBG_InterruptTimeControl\PUBG_InterruptTimeControl.csproj", "{C5E5B23E-A898-4F7C-9C03-22322A398208}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루션 항목", "{542C6B93-D7A1-4DC4-9712-FD21938820ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5E5B23E-A898-4F7C-9C03-22322A398208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E5B23E-A898-4F7C-9C03-22322A398208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E5B23E-A898-4F7C-9C03-22322A398208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E5B23E-A898-4F7C-9C03-22322A398208}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0A45008-9399-43E3-80B6-BD275DCEAD29}
+	EndGlobalSection
+EndGlobal

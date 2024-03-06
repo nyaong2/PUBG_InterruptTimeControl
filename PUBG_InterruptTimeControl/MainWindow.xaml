@@ -1,0 +1,43 @@
+﻿<Window x:Class="PUBG_InterruptTimeControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PUBG_InterruptTimeControl"
+        mc:Ignorable="d"
+        Title="Pubg InterrupTimeControl"
+        Width="680" Height="800"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Loaded="MainWindow_Loaded">
+
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch"
+          Background="{DynamicResource {StaticResource Background}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="650"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#EDEDED"
+                Grid.Column="0"
+                VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                Width="auto"  Height="140">
+
+            <Label Style="{StaticResource BasicLabel}"
+                   Content="여백의 美" FontSize="85" FontWeight="Bold" Foreground="Gray"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <Button Template="{StaticResource Button_Circle}"
+                    Tag="./Resources/Image/Menu/Homepage.png"
+                    Content="24"
+                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,-86,55,0"
+                    Click="Button_Homepage_Click"/>
+            <Button Template="{StaticResource Button_Circle}"
+                    Tag="./Resources/Image/Menu/Setting.png"
+                    Content="32"
+                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,-86,10,0"
+                    Click="Button_ProgramRegistry_Click"/>
+        </Grid>
+        <Grid x:Name="Grid_Bottom"
+              Grid.Row="1"
+              VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+    </Grid>
+</Window>

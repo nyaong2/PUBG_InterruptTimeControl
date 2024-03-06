@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="PUBG_InterruptTimeControl.Components.Function.Etc.NvidiaBin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PUBG_InterruptTimeControl.Components.Function"
+             mc:Ignorable="d" 
+             Width="800" Height="600"
+             Loaded="NvidiaBin_Loaded">
+    
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label Style="{StaticResource FunctionLabel}"
+                   Margin="20"
+                   Content="Nvidia Bin 파일"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            
+            <Grid Background="White" 
+                  Width="200" Height="100"
+                  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="190,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ListBox x:Name="TabHeaders"
+                         Grid.Column="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         SelectionChanged="ListBox_Menu_SelectionChanged">
+                    <ListBoxItem Style="{StaticResource ListBoxItem_Menu}" Content="300번대"/>
+                    <ListBoxItem Style="{StaticResource ListBoxItem_Menu}" Content="400번대"/>
+                    <ListBoxItem Style="{StaticResource ListBoxItem_Menu}" Content="500번대"/>
+                </ListBox>
+                <ListBox x:Name="ListBox_Bin" Grid.Column="1"/>
+            </Grid>
+
+            <Button Style="{StaticResource Basic2Button}"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,0,0,0"
+                            Content="적용"
+                            Click="Button_Apply_Click"/>
+
+            <Label Style="{StaticResource BasicLabel}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,170,0,0"
+                   Content="[적용 누를 시 바로 적용됨]" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+        
+</UserControl>

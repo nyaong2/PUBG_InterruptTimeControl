@@ -1,0 +1,94 @@
+﻿<Window x:Class="PUBG_InterruptTimeControl.Components.StartUp.ProgramRegister"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:PUBG_InterruptTimeControl.Components"
+        mc:Ignorable="d"
+        Width="400" Height="260"
+        ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+
+    <Border  Background="white" BorderBrush="#FF40A575"
+             BorderThickness="1.4">
+        <Grid Background="Transparent"
+              Margin="-1.4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Background="#FF40A575">
+                <Label Style="{StaticResource BasicLabel}"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"
+                       FontWeight="Bold" Content="배그 설치 위치 레지스트리 등록"/>
+                <Button Width="18" Height="20"
+                        VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Background="Transparent"
+                        BorderThickness="0" 
+                        Content="X" FontWeight="Bold" FontSize="12" Foreground="White"
+                        Click="Button_Close_Click"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Background="Transparent">
+                <Label VerticalAlignment="Top" HorizontalAlignment="Left" Margin="87,8,0,0"
+                       FontSize="14" FontWeight="Bold" Foreground="Red">
+                    <Underline>둘 중 하나는 등록 돼야만 합니다.</Underline>
+                </Label>
+                <Label VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,32,0,0"
+                       Content="지정 시 배그 폴더에 있는 Tslgame.exe를 지정해주세요." FontSize="14" FontWeight="Bold" Foreground="#FF40A575"/>
+
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="100" Height="30"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-235,20,0,0"
+                        Content="스배 위치 지정"
+                        Click="Button_SteamPubg_Click"/>
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="100" Height="30"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-235,98,0,0"
+                        Content="카배 위치 지정"
+                        Click="Button_KakaoPubg_Click"/>
+                
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" Margin="140,19,110,0"
+                       Content="스배 활성화 : " FontWeight="Bold" FontSize="16" Foreground="Black" />
+                <Label x:Name="Label_SteamApplyCheck" Style="{StaticResource BasicLabel}"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="240,24,0,0"
+                       Content="NULL" FontWeight="Bold" FontSize="16" Foreground="#FF21CA4A" />
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="40" Height="30"
+                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="305,20,0,0"
+                        Content="제거"
+                        Click="Button_SteamRegDelete_Click"/>
+
+
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" Margin="140,99,0,0"
+                       Content="카배 활성화 : " FontWeight="Bold" FontSize="16" Foreground="Black"/>
+                <Label x:Name="Label_KakaoApplyCheck" Style="{StaticResource BasicLabel}"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="240,104,0,0"
+                       Content="NULL" FontWeight="Bold" FontSize="16" Foreground="#FF21CA4A" />
+                <Button Style="{StaticResource Basic2Button}"
+                        Width="40" Height="30"
+                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="305,100,0,0"
+                        Content="제거"
+                        Click="Button_KakaoRegDelete_Click"/>
+
+
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Background="#EBEBEB"
+                  Margin="2.4,0,2.4,1.4">
+                <Button x:Name="CloseButton"
+                        Style="{StaticResource BasicButton}"
+                        Background="Gray" BorderBrush="Transparent"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0"                        
+                        Content="완료"
+                        Click="Button_Confirmation_Click"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

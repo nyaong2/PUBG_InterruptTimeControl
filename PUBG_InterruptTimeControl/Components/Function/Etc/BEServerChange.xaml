@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="PUBG_InterruptTimeControl.Components.Function.Etc.BEServerChange"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PUBG_InterruptTimeControl.Components.Function.Etc"
+             mc:Ignorable="d" 
+             Width="800" Height="600"
+             Loaded="BEServerChange_Loaded">
+    
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label Style="{StaticResource FunctionLabel}"
+                   Margin="20"
+                   Content="Tslgame_BE 서버 파일 위치 변경"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Button Style="{StaticResource Basic2Button}"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-160,-40,0,0"
+                        Content="스배 적용"
+                        Click="Button_SteamApply_Click"/>
+
+                <Button Style="{StaticResource Basic2Button}"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="160,-40,0,0"
+                        Content="카배 적용"
+                        Click="Button_KakaoApply_Click"/>
+
+
+                <Label Style="{StaticResource BasicLabel}"
+                       Margin="313,330,0,0"
+                       Content="현재 위치 : " FontWeight="Bold" Foreground="#FFFFEA00"/>
+
+                <Label x:Name="Label_CurrentValue"
+                       Style="{StaticResource BasicLabel}"
+                       Margin="399,330,0,0"
+                       Content="NULL" FontWeight="Bold" Foreground="#FF00FF3E"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
