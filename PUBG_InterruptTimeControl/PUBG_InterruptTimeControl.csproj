@@ -108,29 +108,38 @@
     <Compile Include="Components\Function\Etc\BEServerChange.xaml.cs">
       <DependentUpon>BEServerChange.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\Function\Etc\WindowsVarietyInstruction.xaml.cs">
-      <DependentUpon>WindowsVarietyInstruction.xaml</DependentUpon>
+    <Compile Include="Components\Function\Etc\NvidiaBin.xaml.cs">
+      <DependentUpon>NvidiaBin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Function\Etc\ProcessDeny.xaml.cs">
       <DependentUpon>ProcessDeny.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\Function\Etc\WindowsMagnifier.xaml.cs">
+      <DependentUpon>WindowsMagnifier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Function\Etc\WindowsVarietyInstruction.xaml.cs">
+      <DependentUpon>WindowsVarietyInstruction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\Function\Etc\WindowsVarietyReg.xaml.cs">
       <DependentUpon>WindowsVarietyReg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Function\Mouse\MouseAccessibilityReg.xaml.cs">
+      <DependentUpon>MouseAccessibilityReg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Function\Mouse\MouseDoubleClick.xaml.cs">
+      <DependentUpon>MouseDoubleClick.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Function\Windows\NtpServer.xaml.cs">
       <DependentUpon>NtpServer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\Function\Windows\Win32Priority.xaml.cs">
-      <DependentUpon>Win32Priority.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Function\Etc\WindowsMagnifier.xaml.cs">
-      <DependentUpon>WindowsMagnifier.xaml</DependentUpon>
+    <Compile Include="Components\Function\Windows\PowerOption.xaml.cs">
+      <DependentUpon>PowerOption.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Function\Windows\Services.xaml.cs">
       <DependentUpon>Services.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\Function\Windows\PowerOption.xaml.cs">
-      <DependentUpon>PowerOption.xaml</DependentUpon>
+    <Compile Include="Components\Function\Windows\Win32Priority.xaml.cs">
+      <DependentUpon>Win32Priority.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Modal\SmallPopupModal.xaml.cs">
       <DependentUpon>SmallPopupModal.xaml</DependentUpon>
@@ -156,6 +165,10 @@
     <Compile Include="Service\Wrapper\ResultWrapper.cs" />
     <Compile Include="Service\Zip\Api\ZipFileWithProgress.cs" />
     <Compile Include="Service\Zip\ZipService.cs" />
+    <Page Include="Components\Function\CopyDisign.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Components\Function\Danger\DatChange.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -169,56 +182,52 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Etc\BEServerChange.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\Etc\WindowsVarietyInstruction.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\Etc\ProcessDeny.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\Etc\WindowsVarietyReg.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\Windows\NtpServer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\Windows\Win32Priority.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\Etc\WindowsMagnifier.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Etc\NvidiaBin.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\Function\Etc\ProcessDeny.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\Function\Etc\WindowsMagnifier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\Function\Etc\WindowsVarietyInstruction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\Function\Etc\WindowsVarietyReg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Mouse\MouseAccessibilityReg.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Components\Function\CopyDisign.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Mouse\MouseDoubleClick.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Components\Function\Windows\Services.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Components\Function\Windows\NtpServer.xaml">
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Windows\PowerOption.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\Function\Windows\Services.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Components\Function\Windows\Win32Priority.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Modal\SmallPopupModal.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -262,17 +271,8 @@
     </Compile>
     <Compile Include="Components\Api\DllImport\DllImport.cs" />
     <Compile Include="Components\Api\Util\Util.cs" />
-    <Compile Include="Components\Function\Etc\NvidiaBin.xaml.cs">
-      <DependentUpon>NvidiaBin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Function\Mouse\MouseAccessibilityReg.xaml.cs">
-      <DependentUpon>MouseAccessibilityReg.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Components\Function\CopyDisign.xaml.cs">
       <DependentUpon>CopyDisign.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Function\Mouse\MouseDoubleClick.xaml.cs">
-      <DependentUpon>MouseDoubleClick.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\Enum\MsgEnum.cs" />
     <Compile Include="Components\Modal\MsgModal.xaml.cs">
@@ -347,5 +347,6 @@
   <ItemGroup>
     <Resource Include="ProgramIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

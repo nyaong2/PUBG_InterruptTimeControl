@@ -28,7 +28,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
     {
         MsgService msgService;
         ProgramUtilService pgRegService;
-        const string reg_BePath = @"HKEY_CURRENT_USER\System\GameConfigStore\Children";
+        private const string reg_BePath = @"HKEY_CURRENT_USER\System\GameConfigStore\Children";
+        private string query = null;
         string reg_FindBePath;
         
         public BEServerChange()
@@ -36,8 +37,13 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             InitializeComponent();
             msgService = new MsgService();
             pgRegService = new ProgramUtilService();
+
+            CreateQueryString();
+
+            //query = "REG QUERY \"" + reg_BePath + "\" /f \"Tslgame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"";
+            //query = "wow";
         }
-        
+
         private void BEServerChange_Loaded(object sender, RoutedEventArgs e)
         {
             //스배&카배 중복설치 및 한개만 설치가 됐는지 체크
@@ -52,6 +58,16 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
 
         #region Function
+
+        private void CreateQueryString()
+        {
+            //query = "REG QUERY \"HKCU\\System\\GameConfigStore\\Children\" /f \"TslGame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"";
+            //var sb = new StringBuilder("REG QUERY \"");
+            //sb.Append(reg_BePath).Append("\"").Append(" /f \"Tslgame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"\"");
+            //query = null;
+            //query = sb.ToString();
+            //query = "ssibal";
+        }
         private bool ProperPUBGInstallCheck()
         {
             var result = true;
@@ -72,7 +88,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
         private bool GetBePath()
         {
-            reg_FindBePath = Util.Dos.Cmd("REG QUERY \"" + reg_BePath + "\" /f \"Tslgame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"");
+            reg_FindBePath = Util.Dos.Cmd(query);
 
             if (String.IsNullOrEmpty(reg_FindBePath))
             {
@@ -81,6 +97,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             }
             else
                 return true;
+
         }
         private void SetLabelCurrentRegApplyPath()
         {
