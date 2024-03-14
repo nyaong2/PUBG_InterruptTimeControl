@@ -66,13 +66,19 @@
                         Click="Button_ProcessDeny_Click"/>
                 <Button Style="{StaticResource BasicButton}"
                         HorizontalAlignment="Left" Margin="459,10,0,0"
+                        Content="돋보기 내레이션 속도"
+                        Click="Button_WindowsMagnifier_Click"/>
+                <Button Style="{StaticResource BasicButton}"
+                        HorizontalAlignment="Left" Margin="9,65,0,0"
                         Content="윈도우 각종 레지"
                         Click="Button_WindowsVarietyReg_Click"/>
 
+
                 <Button Style="{StaticResource BasicButton}"
-                        HorizontalAlignment="Left" Margin="9,65,0,0"
-                        Content="돋보기 내레이션 속도"
-                        Click="Button_WindowsMagnifier_Click"/>                
+                        HorizontalAlignment="Left" Margin="159,65,0,0"
+                        Content="윈도우 각종 명령어"
+                        Click="Button_WindowsVarietyInstruction_Click"/>
+
 
             </Grid>
         </GroupBox>

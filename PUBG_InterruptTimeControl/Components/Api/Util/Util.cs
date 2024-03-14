@@ -25,7 +25,7 @@ using static DllImport.Service;
 class Util
 {
     /// <summary>
-    /// 최종수정 : 2024-03-01
+    /// 최종수정 : 2024-03-13
     /// </summary>
 
     #region System
@@ -869,14 +869,6 @@ class Util
                 ps.WaitForExit();
                 return result;
             }
-        }
-
-        private static string CommandCreate(string Execute, string Commands, string Value)
-        {
-            StringBuilder Command = new StringBuilder(Execute + " ");
-            Command.Append(Commands).Append(" ").Append(Value);
-
-            return Command.ToString();
         }
 
         public static string Ps(in string Argument)

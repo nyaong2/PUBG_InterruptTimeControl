@@ -56,7 +56,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
             if(String.IsNullOrEmpty(pgUtilService.reg_KakaoPath))
                 Button_ServerKakao.IsEnabled = false;
             if (String.IsNullOrEmpty(pgUtilService.reg_SteamPath))
-                Button_ServerKakao.IsEnabled = false;
+                Button_ServerSteam.IsEnabled = false;
         }
 
         #region Function

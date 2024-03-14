@@ -26,7 +26,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
         private const string regPath = @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options";
         private const string regName = "Debugger";
-        private const string regValue = @"%WINDIR%\System32\taskkill.exe";
+        private readonly string regValue = null;
         private const Util.Reg.RegValueKind regType = Util.Reg.RegValueKind.SZ;
         private const string processName_Se = "tslgame_se.exe";
         private const string processName_Ucldr = "ucldr_battlegrounds_gl.exe";
@@ -35,6 +35,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             InitializeComponent();
             pgUtilService = new ProgramUtilService();
+            regValue = Environment.GetEnvironmentVariable("WINDIR") + @"\System32\taskkill.exe";
+
         }
         private void ProcessDeny_Loaded(object sender, RoutedEventArgs e)
         {
