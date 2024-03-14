@@ -84,7 +84,6 @@ namespace PUBG_InterruptTimeControl.Components
             activeUserControlEvent(new WindowsVarietyInstruction());
         }
 
-
         private void Button_DatChange_Click(object sender, RoutedEventArgs e)
         {
             activeUserControlEvent(new DatChange());
