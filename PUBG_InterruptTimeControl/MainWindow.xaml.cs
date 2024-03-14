@@ -66,9 +66,9 @@ namespace PUBG_InterruptTimeControl
         private void ProgramVersionCheck()
         {
             var currentVersion = (string)Application.Current.Resources["ProgramVersion"];
-            var convertVersion = double.NaN;
+            double convertVersion = double.NaN;
             double.TryParse(currentVersion, out convertVersion);
-            var downloadVersion = downloadService.GetVersion(pgUtilService.url_ProgramVersion);
+            double downloadVersion = downloadService.GetVersion(pgUtilService.url_ProgramVersion); //var로주면 소수점으로 인식못함. double로.
 
             if (double.IsNaN(convertVersion) || double.IsNaN(downloadVersion))
                 msgService.Show(MsgEnum.Category.Waring, MsgEnum.CloseType.Close, "프로그램 버전을 확인할 수 없습니다.\r\n최신버전을 다시 다운 받아보세요.");

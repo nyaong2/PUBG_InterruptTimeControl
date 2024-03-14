@@ -157,16 +157,16 @@
     <Compile Include="Service\Zip\Api\ZipFileWithProgress.cs" />
     <Compile Include="Service\Zip\ZipService.cs" />
     <Page Include="Components\Function\Danger\DatChange.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Danger\FileEngine.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Danger\StartOptionProgram.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Etc\BEServerChange.xaml">
       <Generator>MSBuild:Compile</Generator>
