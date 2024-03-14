@@ -6,7 +6,7 @@
              StartupUri="MainWindow.xaml">
     
     <Application.Resources>
-        <sys:String x:Key="ProgramVersion">1.0</sys:String>
+        <sys:String x:Key="ProgramVersion">1.1</sys:String>
         
         <SolidColorBrush x:Key="Background" Color="White"/>
 
