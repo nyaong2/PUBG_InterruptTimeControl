@@ -48,7 +48,7 @@
                         Width="90" Height="50"
                         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="105,-95,0,0"
                         Content="카배 적용" FontSize="13"
-                        Click="Button_SteamApply_Click"/>
+                        Click="Button_KakaoApply_Click"/>
                 <Button x:Name="Button_KakaoRestore"
                         Style="{StaticResource Basic2Button}"
                         Width="100" Height="30"

@@ -76,7 +76,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
                 case 10:
                     return "200";
                 default:
-                    return "200";
+                    return null;
             }
         }
         private int GetGageValue(string regValue)
@@ -106,7 +106,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
                 case "200":
                     return 10;
                 default:
-                    return 10;
+                    return -1;
             }
         }
         #endregion
@@ -114,8 +114,12 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
         #region Event Handler
         private void Slider_Gage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Apply(int.Parse(e.NewValue.ToString()));
-            GetCurrentReg();
+            var value = int.Parse(e.NewValue.ToString());
+            if (value != -1)
+            {
+                Apply(value);
+                GetCurrentReg();
+            }
         }
 
         private void Button_InputApply_Click(object sender, RoutedEventArgs e)

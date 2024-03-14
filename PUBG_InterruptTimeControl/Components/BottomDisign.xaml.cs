@@ -41,33 +41,14 @@ namespace PUBG_InterruptTimeControl.Components
         {
             activeUserControlEvent(new MouseAccessibilityReg());
         }
-        private void Button_NvidiaBin_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new NvidiaBin());
-        }
-        private void Button_FileEngine_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new FileEngine());
-        }
-        private void Button_WindowsMagnifier_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new WindowsMagnifier());
-        }
+
         private void Button_PowerOption_Click(object sender, RoutedEventArgs e)
         {
             activeUserControlEvent(new PowerOption());
         }
-        private void Button_BeServerPath_Click(object sender, RoutedEventArgs e)
+        private void Button_Services_Click(object sender, RoutedEventArgs e)
         {
-            activeUserControlEvent(new BEServerChange());
-        }
-        private void Button_DatChange_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new DatChange());
-        }
-        private void Button_StartOptionProgram_Click(object sender, RoutedEventArgs e)
-        {
-            activeUserControlEvent(new StartOptionProgram());
+            activeUserControlEvent(new Services());
         }
         private void Button_ProcessorPriority_Click(object sender, RoutedEventArgs e)
         {
@@ -77,19 +58,45 @@ namespace PUBG_InterruptTimeControl.Components
         {
             activeUserControlEvent(new NtpServer());
         }
-        private void Button_WindowsVarietyReg_Click(object sender, RoutedEventArgs e)
+
+        private void Button_NvidiaBin_Click(object sender, RoutedEventArgs e)
         {
-            activeUserControlEvent(new WindowsVarietyReg());
+            activeUserControlEvent(new NvidiaBin());
+        }
+        private void Button_BeServerPath_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new BEServerChange());
         }
         private void Button_ProcessDeny_Click(object sender, RoutedEventArgs e)
         {
             activeUserControlEvent(new ProcessDeny());
         }
-        private void Button_Services_Click(object sender, RoutedEventArgs e)
+        private void Button_WindowsMagnifier_Click(object sender, RoutedEventArgs e)
         {
-            activeUserControlEvent(new Services());
+            activeUserControlEvent(new WindowsMagnifier());
+        }
+        private void Button_WindowsVarietyReg_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new WindowsVarietyReg());
+        }
+        private void Button_WindowsVarietyInstruction_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new WindowsVarietyInstruction());
         }
 
+
+        private void Button_DatChange_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new DatChange());
+        }
+        private void Button_FileEngine_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new FileEngine());
+        }
+        private void Button_StartOptionProgram_Click(object sender, RoutedEventArgs e)
+        {
+            activeUserControlEvent(new StartOptionProgram());
+        }
         #endregion
 
     }

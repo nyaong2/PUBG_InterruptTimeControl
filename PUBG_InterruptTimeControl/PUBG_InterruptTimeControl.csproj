@@ -108,6 +108,9 @@
     <Compile Include="Components\Function\Etc\BEServerChange.xaml.cs">
       <DependentUpon>BEServerChange.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\Function\Etc\WindowsVarietyInstruction.xaml.cs">
+      <DependentUpon>WindowsVarietyInstruction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\Function\Etc\ProcessDeny.xaml.cs">
       <DependentUpon>ProcessDeny.xaml</DependentUpon>
     </Compile>
@@ -154,18 +157,22 @@
     <Compile Include="Service\Zip\Api\ZipFileWithProgress.cs" />
     <Compile Include="Service\Zip\ZipService.cs" />
     <Page Include="Components\Function\Danger\DatChange.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Danger\FileEngine.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Danger\StartOptionProgram.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Etc\BEServerChange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\Function\Etc\WindowsVarietyInstruction.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
