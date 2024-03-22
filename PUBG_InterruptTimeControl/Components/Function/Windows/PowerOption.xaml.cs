@@ -63,7 +63,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
 
             GetDisplay();
             GetPowerSaving();
-            GUID_GetSuperPerformance = Util.Dos.Cmd("for /f \"tokens=4\" %G in ('powercfg -list ^| findstr /C:\"최고의 성능\"') do echo %G");
+            GUID_GetSuperPerformance = Util.Dos.Cmd("for /f \"tokens=4\" %G in ('powercfg -list ^| findstr /C:\"최고의 성능\"') do %G");
             GetPowerOption();
         }
 
@@ -96,6 +96,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
                 return;
             }
             Label_Display.Content = value / 60;
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private void GetPowerSaving()
@@ -128,6 +130,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
                 return;
             }
             Label_PowerSaving.Content = value / 60;
+
+            msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private void GetPowerOption()
@@ -154,6 +158,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             Label_CurrentValue.Content = CurrentOptionHangle(GUID);
             GetDisplay();
             GetPowerSaving();
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private string CurrentOptionHangle(string GUID)
@@ -177,13 +183,13 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
         #region Handler
         private void Button_SuperPerformance_Click(object sender, RoutedEventArgs e)
         {
-            GUID_GetSuperPerformance = Util.Dos.Cmd("for /f \"tokens=4\" %G in ('powercfg -list ^| findstr /C:\"최고의 성능\"') do echo %G");
+            GUID_GetSuperPerformance = Util.Dos.Cmd("for /f \"tokens=4\" %G in ('powercfg -list ^| findstr /C:\"최고의 성능\"') do  %G");
 
             //최고의 성능이 추가가 되어있지 않다면 추가
             if (String.IsNullOrEmpty(GUID_GetSuperPerformance))
             {
                 Util.Dos.Cmd("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
-                GUID_GetSuperPerformance = Util.Dos.Cmd("for /f \"tokens=4\" %G in ('powercfg -list ^| findstr /C:\"최고의 성능\"') do echo %G");
+                GUID_GetSuperPerformance = Util.Dos.Cmd("for /f \"tokens=4\" %G in ('powercfg -list ^| findstr /C:\"최고의 성능\"') do %G");
             }
 
             SetPowerOption(GUID_GetSuperPerformance);

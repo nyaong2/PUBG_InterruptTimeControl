@@ -64,7 +64,6 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             var value = Util.Reg.Read(gameDVR_RegPath, gameDVR_RegName);
             Label_CurrentGameDVR.Content = value == null ? "미적용" : value;
-
         }
 
         private void BufferKeyboardApply()
@@ -77,11 +76,15 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             Util.Reg.Write(buffer_KeyboardRegPath, buffer_KeyboardRegName, TextBox_InputKeyboard.Text, Util.Reg.RegValueKind.DWORD);
             Label_CurrentKeyboard.Content = TextBox_InputKeyboard.Text;
             TextBox_InputKeyboard.Text = "";
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
         private void BufferKeyboardRestore()
         {
             Util.Reg.Write(buffer_KeyboardRegPath, buffer_KeyboardRegName, "100", Util.Reg.RegValueKind.DWORD);
             Label_CurrentKeyboard.Content = 100;
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
 
         private void BufferMouseApply()
@@ -94,11 +97,15 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             Util.Reg.Write(buffer_MouseRegPath, buffer_MouseRegName, TextBox_InputMouse.Text, Util.Reg.RegValueKind.DWORD);
             Label_CurrentMouse.Content = TextBox_InputMouse.Text;
             TextBox_InputMouse.Text = "";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
+
         }
         private void BufferMouseRestore()
         {
             Util.Reg.Delete(buffer_MouseRegPath, buffer_MouseRegName);
-            Label_CurrentMouse.Content = "NULL"; 
+            Label_CurrentMouse.Content = "NULL";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+
         }
 
         private void SetLabelCurrentNetworkNagle()
@@ -109,11 +116,15 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             Util.Reg.Write(findNetworkInterfaceRegPath, networkNagleRegName, "1", Util.Reg.RegValueKind.DWORD);
             Label_CurrentNagle.Content = "적용";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
+
         }
         private void NetworkNagleRestore()
         {
             Util.Reg.Delete(findNetworkInterfaceRegPath, networkNagleRegName);
             Label_CurrentNagle.Content = "미적용";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+
         }
 
         private string GetNetworkInterfaceRegPath()
@@ -151,12 +162,15 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             Util.Reg.Write(gameDVR_RegPath, gameDVR_RegName, TextBox_GameDVR.Text, Util.Reg.RegValueKind.DWORD);
             Label_CurrentGameDVR.Content = TextBox_GameDVR.Text;
             TextBox_GameDVR.Text = "";
+            msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private void GameDVRRestore()
         {
             Util.Reg.Write(gameDVR_RegPath, gameDVR_RegName, "2", Util.Reg.RegValueKind.DWORD);
             Label_CurrentGameDVR.Content = "2";
+
+            msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
         #endregion
 

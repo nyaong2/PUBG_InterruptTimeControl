@@ -2,6 +2,7 @@
 using PUBG_InterruptTimeControl.Service.Msg;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,12 +40,12 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
             if (result.ToLower().Contains("false")) //꺼진게 적용된 것임.
             {
-                Label_CurrentMemoryCompression.Content = "적용";
+                Label_CurrentMemoryCompression.Content = "비활성화";
                 return true;
             }
             else
             {
-                Label_CurrentMemoryCompression.Content = "미적용";
+                Label_CurrentMemoryCompression.Content = "활성화";
                 return false;
             }
         }
@@ -52,8 +53,11 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             var result = Util.Dos.Ps("Disable-MMAgent -MemoryCompression");
 
-            if (LabelChangeCurrentMemoryCompression() == false)
+            if (LabelChangeCurrentMemoryCompression())
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "메모리 압축 기능이 해제되었습니다.");
+            else
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
+
         }
         private void MemoryCompressionRestore()
         {
@@ -61,7 +65,9 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
             LabelChangeCurrentMemoryCompression();
 
-            if (LabelChangeCurrentMemoryCompression() == true)
+            if (LabelChangeCurrentMemoryCompression())
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "메모리 압축 기능이 원상복구 되었습니다.");
+            else
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "원상복구에 실패했습니다.");
         }
         #endregion

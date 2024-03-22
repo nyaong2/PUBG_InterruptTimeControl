@@ -107,6 +107,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             var selectItem = int.Parse((ComboBox_Flags.SelectedValue as ComboBoxItem).Content.ToString());
             string regValue = ListBox_NtpServer.SelectedValue.ToString() + SetFlagConvertString(selectItem);
             Util.Reg.Write(regPath, regName, regValue, Util.Reg.RegValueKind.SZ);
+            Util.Dos.Cmd("sc config \"W32Time\" start= auto");
+            Util.Dos.Cmd("sc start W32Time");
             Util.Dos.Cmd("w32tm /config /update");
             var result = Util.Dos.Cmd("w32tm /resync");
 
@@ -123,13 +125,16 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             } else
             {
                 Label_CurrentValue.Content = regValue;
+                Util.Dos.Cmd("sc config \"W32Time\" start= demand");
+                Util.Dos.Cmd("sc stop W32Time");
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
             }
         }
         private void Apply(string server)
         {
-
-
             Util.Reg.Write(regPath, regName, server, Util.Reg.RegValueKind.SZ);
+            Util.Dos.Cmd("sc config \"W32Time\" start= auto");
+            Util.Dos.Cmd("sc start W32Time");
             Util.Dos.Cmd("w32tm /config /update");
             var result = Util.Dos.Cmd("w32tm /resync");
 
@@ -146,6 +151,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             } else
             {
                 Label_CurrentValue.Content = server;
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
             }
         }
 
@@ -154,8 +160,9 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             Util.Reg.Write(regPath, regName, originalServer, Util.Reg.RegValueKind.SZ);
             Util.Dos.Cmd("w32tm /config /update");
             Util.Dos.Cmd("w32tm /resync");
-
             Label_CurrentValue.Content = originalServer;
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+
         }
         #endregion
 

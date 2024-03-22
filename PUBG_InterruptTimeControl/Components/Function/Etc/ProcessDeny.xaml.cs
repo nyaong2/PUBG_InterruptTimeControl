@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using PUBG_InterruptTimeControl.Components.Modal.Action;
+using PUBG_InterruptTimeControl.Service.Msg;
 using PUBG_InterruptTimeControl.Service.PgReg;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
     public partial class ProcessDeny : UserControl
     {
         private ProgramUtilService pgUtilService;
-
+        private MsgService msgService;
         private const string regPath = @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options";
         private const string regName = "Debugger";
         private readonly string regValue = null;
@@ -35,8 +37,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             InitializeComponent();
             pgUtilService = new ProgramUtilService();
+            msgService = new MsgService();
             regValue = Environment.GetEnvironmentVariable("WINDIR") + @"\System32\taskkill.exe";
-
         }
         private void ProcessDeny_Loaded(object sender, RoutedEventArgs e)
         {
@@ -63,27 +65,32 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             var key = new StringBuilder(regPath);
             key.Append(@"\").Append(processName_Se);
+
             Util.Reg.Write(key.ToString(), regName, regValue, regType);
             Label_CurrentProcess_Se.Content = "적용";
-
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "se 실행 방지가 적용이 완료되었습니다.");
         }
         private void RestoreProcess_Se()
         {
             Util.Reg.DeleteSubKey(regPath, processName_Se);
             Label_CurrentProcess_Se.Content = "미적용";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
 
         private void DenyProcess_Ucldr()
         {
             var key = new StringBuilder(regPath);
             key.Append(@"\").Append(processName_Ucldr);
+
             Util.Reg.Write(key.ToString(), regName, regValue, regType);
             Label_CurrentProcess_Ucldr.Content = "적용";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "ucldr 실행 방지가 적용이 완료되었습니다.");
         }
         private void RestoreProcess_Ucldr()
         {
             Util.Reg.DeleteSubKey(regPath, processName_Ucldr);
             Label_CurrentProcess_Ucldr.Content = "미적용";
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
 
 

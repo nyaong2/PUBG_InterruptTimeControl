@@ -72,19 +72,17 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
             if (version == double.NaN || version < downloadVersion ||
                 di.GetFiles().Any(file => file.Name.Equals("TslGame_BE.exe")) == false || di.GetFiles().Length <= 1)
             {
-                if ((int)MsgEnum.Result.Yes == msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.YesNo,
-                                                "StartUp파일이 존재하지 않거나 구버전입니다.\r\n다운로드 하시겠습니까?"))
+                if ( msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.YesNo,
+                                    "StartUp파일이 존재하지 않거나 구버전입니다.\r\n다운로드 하시겠습니까?") == (int)MsgEnum.Result.Yes)
                 {
                     di.Delete(true);
                     di.Create();
                     if ((downloadService.Download(pgUtilService.url_EtcFile) == ResultEnum.Success) &&
                           (zipService.Extract(downloadService.GetDownloadedFilePath(pgUtilService.url_EtcFile), etcPath) == ResultEnum.Success))
-                    {
                         pgUtilService.SetFileVersion(fileVersionPath, downloadVersion);
-                        return;
-                    }
-                }
-                ControlExit();
+                    
+                } else
+                    ControlExit();
             }
         }
 
@@ -106,15 +104,22 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
             // 이미 적용되어있는지 크기로 확인
             if(new FileInfo(bePath).Length == new FileInfo(startUpFilePath).Length)
             {
-                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "이미 적용되어 있습니다.");
+                msgService.Show(MsgEnum.Category.Waring, MsgEnum.CloseType.Close, "이미 적용되어 있습니다.");
                 return;
             }
 
-            //기존 원본파일 파일명 변경
-            File.Move(bePath, regServerPath + @"\TslGame_BE2.exe");
-            // 시작옵션 프로그램 복사
-            File.Copy(startUpFilePath, bePath);
-
+            try
+            {
+                //기존 원본파일 파일명 변경
+                File.Move(bePath, regServerPath + @"\TslGame_BE2.exe");
+                // 시작옵션 프로그램 복사
+                File.Copy(startUpFilePath, bePath);
+            } catch
+            {
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
+                return;
+            }
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용이 완료되었습니다.");
         }
         private void Restore(string regServerPath)
         {
@@ -140,12 +145,20 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 return;
             }
 
-            //시작옵션 파일 제거
-            File.Delete(regServerPath + @"\TslGame_BE.exe");
+            try
+            {
+                //시작옵션 파일 제거
+                File.Delete(regServerPath + @"\TslGame_BE.exe");
 
-            //기존 원본파일 이름변경
-            File.Move(applyBePath, originalBePath);
-            
+                //기존 원본파일 이름변경
+                File.Move(applyBePath, originalBePath);
+            } catch
+            {
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
+                return;
+            }
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+
         }
         private void ControlExit()
         {

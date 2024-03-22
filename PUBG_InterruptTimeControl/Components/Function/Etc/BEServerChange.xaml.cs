@@ -38,36 +38,25 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             msgService = new MsgService();
             pgRegService = new ProgramUtilService();
 
-            CreateQueryString();
+            query = "REG QUERY \"HKCU\\System\\GameConfigStore\\Children\" /f \"TslGame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"";
 
-            //query = "REG QUERY \"" + reg_BePath + "\" /f \"Tslgame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"";
-            //query = "wow";
         }
 
         private void BEServerChange_Loaded(object sender, RoutedEventArgs e)
         {
-            //스배&카배 중복설치 및 한개만 설치가 됐는지 체크
-            if (ProperPUBGInstallCheck() == false)
+            //스배&카배 중복설치 및 한개만 설치가 됐는지 체크 & 실질적으로 필요한 tslgame_be 레지 찾기
+            if ((ProperPUBGInstallCheck() && GetBePath()) == false)
+            {
                 ControlExit();
-            //실질적으로 필요한 tslgame_be 레지 찾기
-            if (GetBePath() == false)
-                ControlExit();
-            //tslgame_be 레지 찾고 현재 설정되어있는 위치에 따라 label 변경
-            SetLabelCurrentRegApplyPath();
+                return;
+            }
+            
+            SetLabelCurrentRegApplyPath(); //tslgame_be 레지 찾고 현재 설정되어있는 위치에 따라 label 변경
+
         }
 
 
         #region Function
-
-        private void CreateQueryString()
-        {
-            //query = "REG QUERY \"HKCU\\System\\GameConfigStore\\Children\" /f \"TslGame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"";
-            //var sb = new StringBuilder("REG QUERY \"");
-            //sb.Append(reg_BePath).Append("\"").Append(" /f \"Tslgame_BE.exe\" /s 2>nul | find /i \"HKEY_CURRENT_USER\"\"");
-            //query = null;
-            //query = sb.ToString();
-            //query = "ssibal";
-        }
         private bool ProperPUBGInstallCheck()
         {
             var result = true;
@@ -83,7 +72,6 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             }
 
             return result;
-
         }
 
         private bool GetBePath()
@@ -112,6 +100,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             var window = Window.GetWindow(this);
             window.Close();
+            return;
         }
         #endregion
 
@@ -119,13 +108,23 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         private void Button_SteamApply_Click(object sender, RoutedEventArgs e)
         {
             if (Util.Reg.Write(reg_FindBePath, "MatchedExeFullPath", pgRegService.reg_SteamPath + @"\TslGame_BE.exe", Util.Reg.RegValueKind.SZ))
+            {
                 Label_CurrentValue.Content = "스배";
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "스팀배그 위치로 적용이 완료되었습니다.");
+            }
+            else
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
         }
 
         private void Button_KakaoApply_Click(object sender, RoutedEventArgs e)
         {
             if (Util.Reg.Write(reg_FindBePath, "MatchedExeFullPath", pgRegService.reg_KakaoPath + @"\TslGame_BE.exe", Util.Reg.RegValueKind.SZ))
+            {
                 Label_CurrentValue.Content = "카배";
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "다음배그 위치로 적용이 완료되었습니다.");
+            }
+            else
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
         }
         #endregion
 

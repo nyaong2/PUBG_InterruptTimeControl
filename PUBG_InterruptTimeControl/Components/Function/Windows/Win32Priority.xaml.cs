@@ -56,12 +56,17 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             }
             Util.Reg.Write(regPath, regName, TextBox_Input.Text, Util.Reg.RegValueKind.DWORD);
             Label_CurrentValue.Content = TextBox_Input.Text;
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private void Restore()
         {
             Util.Reg.Write(regPath, regName, defaultValue.ToString(), Util.Reg.RegValueKind.DWORD);
             Label_CurrentValue.Content = defaultValue;
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+
         }
         #endregion
 
@@ -70,11 +75,13 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
         {
             Util.Reg.Write(regPath, regName, programValue.ToString(), Util.Reg.RegValueKind.DWORD);
             Label_CurrentValue.Content = programValue;
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
         private void Button_Background_Click(object sender, RoutedEventArgs e)
         {
             Util.Reg.Write(regPath, regName, backgroundServiceValue.ToString(), Util.Reg.RegValueKind.DWORD);
             Label_CurrentValue.Content = backgroundServiceValue;
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
         private void Button_InputApply_Click(object sender, RoutedEventArgs e)
         {

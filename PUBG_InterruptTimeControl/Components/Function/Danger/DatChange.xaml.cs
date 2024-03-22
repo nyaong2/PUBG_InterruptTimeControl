@@ -78,12 +78,10 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                     di.Create();
                     if ((downloadService.Download(pgUtilService.url_DatFile) == ResultEnum.Success) &&
                           (zipService.Extract(downloadService.GetDownloadedFilePath(pgUtilService.url_DatFile), datPath) == ResultEnum.Success))
-                    {
                         pgUtilService.SetFileVersion(fileVersionPath, downloadVersion);
-                        return;
-                    }
-                }
-                ControlExit();
+
+                } else
+                    ControlExit();
             }
         }
 
@@ -125,20 +123,16 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
             var serverDatPath = Label_CurrentValue.Content.Equals(str_Steam) ? pgUtilService.reg_SteamPath : pgUtilService.reg_KakaoPath;
             serverDatPath += @"\bgsecondary.dat";
 
-            if (Util.File.Permission.Delete("everyone", serverDatPath) == false)
-            {
-                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
-                return;
-            }
-
             try
             {
                 if (Util.File.Permission.Delete("everyone", serverDatPath) == false)
                     throw new Exception();
                 File.Copy(sb.ToString(), serverDatPath, true);
                 Util.File.Permission.Add("everyone", FileSystemRights.FullControl, AccessControlType.Deny, serverDatPath);
+
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용이 완료됐습니다.\r\n적용버전 : " + selectFileName);
             }
-            catch
+            catch (Exception ex)
             {
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
                 return;
@@ -168,7 +162,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 return;
             }
 
-            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "배그를 껐다 켜주셔야 원상복구 됩니다.");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구가 완료되었습니다.\r\n배그를 킨 뒤 껐다 켜주셔야 원상복구 됩니다.");
         }
 
         private void ControlExit()

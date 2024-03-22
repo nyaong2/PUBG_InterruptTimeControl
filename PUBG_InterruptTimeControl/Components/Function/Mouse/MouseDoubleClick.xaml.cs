@@ -24,12 +24,12 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
     public partial class MouseDoubleClick : UserControl
     {
         private readonly MsgService msgService;
-
+        private bool loadedCheck = false;
         public MouseDoubleClick()
         {
             InitializeComponent();
             msgService = new MsgService();
-            
+
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -43,7 +43,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
             Label_CurrentValue.Content = Util.Reg.Read(@"HKEY_CURRENT_USER\Control Panel\Mouse", "DoubleClickSpeed");
         }
 
-        private void Apply(int gageValue)
+        private void GageApply(int gageValue)
         {
             Util.Reg.Write(@"HKEY_CURRENT_USER\Control Panel\Mouse", "DoubleClickSpeed",
                            GetEnumValue(gageValue), Util.Reg.RegValueKind.SZ);
@@ -51,7 +51,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
 
         private string GetEnumValue(int gageValue)
         {
-            switch(gageValue)
+            switch (gageValue)
             {
                 case 0:
                     return "900";
@@ -109,22 +109,10 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
                     return -1;
             }
         }
-        #endregion
 
-        #region Event Handler
-        private void Slider_Gage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Apply()
         {
-            var value = int.Parse(e.NewValue.ToString());
-            if (value != -1)
-            {
-                Apply(value);
-                GetCurrentReg();
-            }
-        }
-
-        private void Button_InputApply_Click(object sender, RoutedEventArgs e)
-        {
-            if(String.IsNullOrEmpty(TextBox_Input.Text))
+            if (String.IsNullOrEmpty(TextBox_Input.Text))
             {
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "값이 비어있습니다.");
                 return;
@@ -134,14 +122,37 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
                            TextBox_Input.Text,
                            Util.Reg.RegValueKind.SZ);
             GetCurrentReg();
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
+        }
+        private void Restore()
+        {
+            Util.Reg.Write(@"HKEY_CURRENT_USER\Control Panel\Mouse", "DoubleClickSpeed", "550", Util.Reg.RegValueKind.SZ);
+            GetCurrentReg();
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+        }
+        #endregion
+
+        #region Event Handler
+        private void Slider_Gage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var value = int.Parse(e.NewValue.ToString());
+            if (value != -1)
+            {
+                GageApply(value);
+                GetCurrentReg();
+            }
+        }
+
+        private void Button_InputApply_Click(object sender, RoutedEventArgs e)
+        {
+            Apply();
         }
 
         private void Button_Restore_Click(object sender, RoutedEventArgs e)
         {
-            Util.Reg.Write(@"HKEY_CURRENT_USER\Control Panel\Mouse", "DoubleClickSpeed",
-                           "550",
-                           Util.Reg.RegValueKind.SZ);
-            GetCurrentReg();
+            Restore();
         }
         #endregion
     }

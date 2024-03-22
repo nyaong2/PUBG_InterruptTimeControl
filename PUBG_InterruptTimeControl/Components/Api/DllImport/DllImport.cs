@@ -187,7 +187,7 @@ class DllImport
         /// <summary>
         /// QueryServiceStatusEx
         /// </summary>
-        [DllImport("advapi32.dll")]
+        [DllImport("advapi32.dll", SetLastError = true)]
         public static extern bool QueryServiceStatusEx(IntPtr hService, int InfoLevel, ref SERVICE_STATUS_PROCESS lpBuffer, int cbBufSize, out int pcbBytesNeeded);
         internal const int ERROR_INSUFFICIENT_BUFFER = 0x7a;
         internal const int SC_STATUS_PROCESS_INFO = 0;
@@ -287,20 +287,30 @@ class DllImport
     #region Processes
     public class Processes
     {
-        // GetCurrentProcess
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr GetCurrentProcess();
 
-        [DllImport("kernel32")]
-        public static extern IntPtr CreateToolhelp32Snapshot(Int32 dwFlags, Int32 th32ProcessID);
-        [DllImport("kernel32")]
-        public static extern Int32 Process32First(IntPtr hSnapshot, ref PROCESSENTRY32 pe32);
-        [DllImport("kernel32")]
-        public static extern Int32 Process32Next(IntPtr hSnapshot, ref PROCESSENTRY32 pe32);
 
+        // [CreateToolhelp32Snapshot 전용]
         public const Int32 MAX_PATH = 260;
         public const Int32 TH32CS_SNAPPROCESS = 2;
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr CreateToolhelp32Snapshot(Int32 dwFlags, Int32 th32ProcessID);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern Int32 Process32First(IntPtr hSnapshot, ref PROCESSENTRY32 pe32);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern Int32 Process32Next(IntPtr hSnapshot, ref PROCESSENTRY32 pe32);
 
+        // [OpenProcess 전용] 목록 추가금지. 마이크로소프트 오진생김.
+        public const uint PROCESS_QUERY_INFORMATION = 0x0400;
+        public const uint PROCESS_VM_READ = 0x0010;
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        [DllImport("kernel32.dll")]
+        public static extern bool QueryFullProcessImageName(IntPtr hprocess, int dwFlags, System.Text.StringBuilder lpExeName, out int size);
+
+
+        //[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         public struct PROCESSENTRY32
         {
             public Int32 dwSize;
@@ -322,29 +332,13 @@ class DllImport
         }
 
         //QueryFullProcessImageName 폴더 위치
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] int dwFlags, [Out] StringBuilder lpExeName, ref int lpdwSize);
-        [DllImport("kernel32.dll")]
-        public static extern IntPtr OpenProcess(ProcessAccess Access, Boolean InheritHandle, uint ProcessId);
+        //[DllImport("kernel32.dll", SetLastError = true)]
+        //public static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] int dwFlags, [Out] StringBuilder lpExeName, ref int lpdwSize);
+        //[DllImport("kernel32.dll", SetLastError = true)]
+        //public static extern IntPtr OpenProcess(ProcessAccess Access, Boolean InheritHandle, uint ProcessId);
 
-        [Flags]
-        internal enum ProcessAccess : uint
-        { //OpenProcess 
-            PROCESS_ALL_ACCESS = 0x001F0FFF,
-            PROCESS_TERMINATE = 0x00000001,
-            PROCESS_CREATE_THREAD = 0x00000002,
-            PROCESS_VM_OPERATION = 0x00000008,
-            PROCESS_VM_READ = 0x00000010,
-            PROCESS_VM_WRITE = 0x00000020,
-            PROCESS_DUP_HANDLE = 0x00000040,
-            PROCESS_CREATE_PROCESS = 0x000000080,
-            PROCESS_SET_QUOTA = 0x00000100,
-            PROCESS_SET_INFORMATION = 0x00000200,
-            PROCESS_QUERY_INFORMATION = 0x00000400,
-            PROCESS_QUERY_LIMITED_INFORMATION = 0x00001000,
-            SYNCHRONIZE = 0x00100000,
-            PROCESS_SUSPEND_RESUME = 0x800
-        }
+
+
     }
     #endregion
 
@@ -356,7 +350,7 @@ class DllImport
         /// <summary>
         /// CloseHandle
         /// </summary>
-        [DllImportAttribute("kernel32.dll", EntryPoint = "CloseHandle")]
+        [DllImport("kernel32.dll", EntryPoint = "CloseHandle", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         public static extern bool CloseHandle([InAttribute] IntPtr hObject);
 
@@ -370,8 +364,8 @@ class DllImport
     #region Etc
     public class Etc
     {
-        [DllImport("kernel32")]
-        public static extern Int32 GetLastError();
+        //[DllImport("kernel32.dll")]
+        //public static extern void SetLastError();
     }
     #endregion
 }

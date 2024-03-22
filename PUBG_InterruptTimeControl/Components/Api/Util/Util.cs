@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using Microsoft.Win32;
+using System.Drawing;
 using static DllImport.Close;
 using static DllImport.Processes;
 using static DllImport.Service;
@@ -17,7 +18,7 @@ using static DllImport.Service;
 class Util
 {
     /// <summary>
-    /// 최종수정 : 2024-03-13
+    /// 최종수정 : 2024-03-16
     /// </summary>
 
     #region System
@@ -271,7 +272,6 @@ class Util
             return getValue.ToString();
         }
     }
-
     #endregion
 
     #region File
@@ -319,8 +319,9 @@ class Util
                     if (find == false) // 못찾고 이 메소드를 진행한 경우 true로.
                         return true;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    MessageBox.Show(ex.ToString());
                     return false;
                 };
 
@@ -531,8 +532,6 @@ class Util
 
             return result;
         }
-
-
     }
 
     #endregion
@@ -542,6 +541,7 @@ class Util
     {
         public class ProcessStruct
         {
+            public Icon Process_Icon { get; set; }
             public string Pid { get; set; }
             public string Name { get; set; }
             public string Path { get; set; }
@@ -564,30 +564,50 @@ class Util
                 return null;
             }
 
-            StringBuilder SbProcessPath = new StringBuilder(260);
-            IntPtr hProcess = IntPtr.Zero;
             do
             {
-                SbProcessPath.Clear();
-                hProcess = OpenProcess(ProcessAccess.PROCESS_ALL_ACCESS, false, (uint)pe32.th32ProcessID);
-                int ProcessPathCapacity = SbProcessPath.Capacity;
-                QueryFullProcessImageName(hProcess, 0, SbProcessPath, ref ProcessPathCapacity);
-                SbProcessPath.Replace(@"\" + pe32.szExeFile, "");
+                Icon icon = null;
+
+                // 마이크로소프트 오진으로 인해 byte[]로 받은 후 변환해서 사용
+                byte[] path = GetPath(pe32.th32ProcessID);
+                string path2 = Encoding.Default.GetString(path);
+                try
+                {
+                    icon = Icon.ExtractAssociatedIcon(path2);
+                }
+                catch { };
 
                 list.Add(new ProcessStruct()
                 {
+                    Process_Icon = icon,
                     Pid = pe32.th32ProcessID.ToString(),
                     Name = pe32.szExeFile,
-                    Path = (SbProcessPath.Length > 5) ? SbProcessPath.ToString() : "Unknown"
+                    Path = (path2.Length > 5) ? path2 : "Unknown"
                 });
 
             } while (Process32Next(hSnapshot, ref pe32) != 0);
             CloseHandle(hSnapshot);
 
-            if (hProcess != IntPtr.Zero)
-                CloseHandle(hProcess);
 
             return list;
+        }
+        private static byte[] GetPath(int pid)
+        {
+            IntPtr processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, pid);
+            if (processHandle == IntPtr.Zero)
+                return null;
+
+            int bufferSize = 512;
+            StringBuilder sb = new StringBuilder(bufferSize);
+            try
+            {
+                sb.Clear();
+                QueryFullProcessImageName(processHandle, 0, sb, out bufferSize);
+            }
+            catch { };
+
+            CloseHandle(processHandle);
+            return Encoding.UTF8.GetBytes(sb.ToString());
         }
 
         public static bool FindName(string[] name)
@@ -597,8 +617,6 @@ class Util
 
             return name.Any(p => hashSet.Contains(p));
         }
-
-
     }
     #endregion
 
@@ -610,9 +628,10 @@ class Util
             var result = "";
             using (Process ps = new Process())
             {
+                var cmdPath = Environment.GetEnvironmentVariable("WINDIR") + @"\System32";
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = @"cmd.exe";
-                psi.WorkingDirectory = Environment.GetEnvironmentVariable("WINDIR") + @"\System32";
+                psi.WorkingDirectory = cmdPath;
                 psi.CreateNoWindow = true;
 
                 psi.UseShellExecute = false; //true = Process클래스가 ShellExecute 함수 사용. False로하면 CreateProcess로 사용. WorkingDirectory를 쓰려면 True로 해야됨.
@@ -630,6 +649,7 @@ class Util
                 try
                 {
                     data = data.Substring(data.IndexOf(command)); // 맨처음 감지되는 값 제거
+                    data = data.Replace(cmdPath + ">", "");
                     //data = data.Substring(data.IndexOf("\r\n")+2, (data.IndexOf("\r\n\r\n") - data.IndexOf("\r\n") -2 )); //아래 match를 안쓸때 수작업 필요한 것
                     Match match = Regex.Match(data, @"\r\n(.+?)\r\n\r\n", RegexOptions.Singleline);
                     if (match.Success)
@@ -644,6 +664,13 @@ class Util
                             result = match.Groups[1].Value;  // 첫 번째 그룹에 있는 값을 가져옵니다.
                         else
                             result = null;
+                    }
+
+                    if (result == null)
+                    {
+                        data = data.Substring(0, data.LastIndexOf("\r\n"));
+                        data = data.Remove(0, data.IndexOf("\r\n") + 2);
+                        result = data;
                     }
                 }
                 catch { result = null; }
