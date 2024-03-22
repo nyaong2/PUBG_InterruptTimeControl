@@ -130,7 +130,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 File.Copy(sb.ToString(), serverDatPath, true);
                 Util.File.Permission.Add("everyone", FileSystemRights.FullControl, AccessControlType.Deny, serverDatPath);
 
-                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용이 완료됐습니다.\r\n적용버전 : " + selectFileName);
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용이 완료됐습니다.\r\n적용버전 : " + selectFileName);
             }
             catch (Exception ex)
             {

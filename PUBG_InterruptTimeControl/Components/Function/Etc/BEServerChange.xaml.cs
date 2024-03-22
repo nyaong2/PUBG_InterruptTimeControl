@@ -50,8 +50,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
                 ControlExit();
                 return;
             }
-            else 
-                SetLabelCurrentRegApplyPath(); //tslgame_be 레지 찾고 현재 설정되어있는 위치에 따라 label 변경
+            
+            SetLabelCurrentRegApplyPath(); //tslgame_be 레지 찾고 현재 설정되어있는 위치에 따라 label 변경
 
         }
 

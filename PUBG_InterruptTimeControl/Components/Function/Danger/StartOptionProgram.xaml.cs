@@ -104,7 +104,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
             // 이미 적용되어있는지 크기로 확인
             if(new FileInfo(bePath).Length == new FileInfo(startUpFilePath).Length)
             {
-                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "이미 적용되어 있습니다.");
+                msgService.Show(MsgEnum.Category.Waring, MsgEnum.CloseType.Close, "이미 적용되어 있습니다.");
                 return;
             }
 
@@ -114,7 +114,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 File.Move(bePath, regServerPath + @"\TslGame_BE2.exe");
                 // 시작옵션 프로그램 복사
                 File.Copy(startUpFilePath, bePath);
-            } catch(Exception ex)
+            } catch
             {
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
                 return;
@@ -157,7 +157,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
                 return;
             }
-            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용이 완료되었습니다.");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
 
         }
         private void ControlExit()

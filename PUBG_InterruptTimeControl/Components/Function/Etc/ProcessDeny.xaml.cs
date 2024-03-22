@@ -37,6 +37,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             InitializeComponent();
             pgUtilService = new ProgramUtilService();
+            msgService = new MsgService();
             regValue = Environment.GetEnvironmentVariable("WINDIR") + @"\System32\taskkill.exe";
         }
         private void ProcessDeny_Loaded(object sender, RoutedEventArgs e)
@@ -73,7 +74,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             Util.Reg.DeleteSubKey(regPath, processName_Se);
             Label_CurrentProcess_Se.Content = "미적용";
-            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "방지 해제가 완료되었습니다.");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
 
         private void DenyProcess_Ucldr()
@@ -89,7 +90,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
         {
             Util.Reg.DeleteSubKey(regPath, processName_Ucldr);
             Label_CurrentProcess_Ucldr.Content = "미적용";
-            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "방지 해제가 완료되었습니다.");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
 
 

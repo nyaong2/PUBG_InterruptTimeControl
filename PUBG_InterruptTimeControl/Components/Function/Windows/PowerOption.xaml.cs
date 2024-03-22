@@ -159,7 +159,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             GetDisplay();
             GetPowerSaving();
 
-            msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용 되었습니다.");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private string CurrentOptionHangle(string GUID)

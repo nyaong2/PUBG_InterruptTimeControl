@@ -127,7 +127,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
                 Label_CurrentValue.Content = regValue;
                 Util.Dos.Cmd("sc config \"W32Time\" start= demand");
                 Util.Dos.Cmd("sc stop W32Time");
-                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용 되었습니다.");
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
             }
         }
         private void Apply(string server)
@@ -151,7 +151,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             } else
             {
                 Label_CurrentValue.Content = server;
-                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용 되었습니다.");
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
             }
         }
 
@@ -161,7 +161,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Windows
             Util.Dos.Cmd("w32tm /config /update");
             Util.Dos.Cmd("w32tm /resync");
             Label_CurrentValue.Content = originalServer;
-            msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
 
         }
         #endregion
