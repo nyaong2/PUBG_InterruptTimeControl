@@ -67,8 +67,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
                         pgUtilService.SetFileVersion(fileVersionPath, downloadVersion);
                         return;
                     }
-                }
-                ControlExit();
+                } else
+                   ControlExit();
             }
         }
 
@@ -114,6 +114,33 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             return data;
         }
 
+        private void Apply()
+        {
+            var selectFileName = ListBox_Bin.SelectedItem as string;
+            if (string.IsNullOrEmpty(selectFileName))
+            {
+                msgService.Show(MsgEnum.Category.Waring, MsgEnum.CloseType.Close, "bin파일이 선택되지 않았습니다.");
+                return;
+            }
+
+            selectFileName += ".bin";
+            StringBuilder sb = new StringBuilder();
+            sb.Append(binPath)
+              .Append(@"\")
+              .Append(selectFileName);
+            try
+            {
+                File.Copy(sb.ToString(), nvidiaBinPath + @"\nvdrsdb.bin", true);
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, selectFileName +" 버전으로 적용이 완료되었습니다.");
+            }
+            catch
+            {
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
+            }
+
+
+        }
+
         private void ControlExit()
         {
             Window window = Window.GetWindow(this);
@@ -130,19 +157,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
         private void Button_Apply_Click(object sender, RoutedEventArgs e)
         {
-            var selectFileName = ListBox_Bin.SelectedItem as string;
-            if (string.IsNullOrEmpty(selectFileName))
-            {
-                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "bin파일이 선택되지 않았습니다.");
-                return;
-            }
-
-            selectFileName += ".bin";
-            StringBuilder sb = new StringBuilder();
-            sb.Append(binPath)
-              .Append(@"\")
-              .Append(selectFileName);
-            File.Copy(sb.ToString(), nvidiaBinPath + @"\nvdrsdb.bin", true);
+            Apply();
         }
         #endregion
 

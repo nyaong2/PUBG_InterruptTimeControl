@@ -28,7 +28,7 @@
                     <Button Style="{StaticResource Basic2Button}"
                             Width="55" Height="45"
                             Margin="54,30,0,0"
-                            Content="적용"
+                            Content="비활성화"
                             Click="Button_MemoryCompressionApply_Click"/>
                     <Button Style="{StaticResource Basic2Button}"
                             Width="55" Height="45"

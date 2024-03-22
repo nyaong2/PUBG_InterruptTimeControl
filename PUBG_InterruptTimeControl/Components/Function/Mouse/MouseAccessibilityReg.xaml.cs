@@ -61,6 +61,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
             TextBox_Flags.Text = TextBox_MaximumSpeed.Text = TextBox_TimeToMaximumSpeed.Text = "";
 
             GetCurrentReg();
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
         private void Buttn_Restore_Click(object sender, RoutedEventArgs e)
@@ -72,6 +74,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Mouse
             Util.Reg.Write(@"HKEY_CURRENT_USER\Control Panel\Accessibility\MouseKeys", "TimeToMaximumSpeed",
                            "3000", Util.Reg.RegValueKind.SZ);
             GetCurrentReg();
+
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
         }
         #endregion
     }

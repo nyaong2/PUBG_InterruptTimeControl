@@ -52,12 +52,10 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
             }
             catch { };
         }
-        #endregion
 
-        #region Handler
-        private void Button_InputApply_Click(object sender, RoutedEventArgs e)
+        private void Apply()
         {
-            if(String.IsNullOrEmpty(TextBox_Input.Text))
+            if (String.IsNullOrEmpty(TextBox_Input.Text))
             {
                 msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "값이 비어있습니다.");
                 return;
@@ -86,13 +84,19 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 File.WriteAllLines(engineFilePath, readEngineFile, Encoding.UTF8);
                 File.SetAttributes(engineFilePath, FileAttributes.ReadOnly);
 
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용이 완료되었습니다.\r\n 적용해상도 : " + TextBox_Input.Text);
+
                 // 현재 값 label 설정 및 텍스트박스 비우기
                 Label_CurrentResolution.Content = TextBox_Input.Text;
                 TextBox_Input.Text = "";
-            } catch { };
+            }
+            catch {
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "적용에 실패했습니다.");
+            };
+
         }
 
-        private void Button_Restore_Click(object sender, RoutedEventArgs e)
+        private void Restore()
         {
             var restoreResolution = "1280x720f";
             try
@@ -118,11 +122,28 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
                 //수정된 내용 쓰기 및 읽기전용 적용
                 File.WriteAllLines(engineFilePath, readEngineFile, Encoding.UTF8);
 
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구가 완료되었습니다.");
+
+
                 // 현재 값 label 설정 및 텍스트박스 비우기
                 Label_CurrentResolution.Content = restoreResolution;
                 TextBox_Input.Text = "";
             }
-            catch { };
+            catch {
+                msgService.Show(MsgEnum.Category.Error, MsgEnum.CloseType.Close, "원상복구에 실패했습니다.");
+            };
+        }
+        #endregion
+
+        #region Handler
+        private void Button_InputApply_Click(object sender, RoutedEventArgs e)
+        {
+            Apply();
+        }
+
+        private void Button_Restore_Click(object sender, RoutedEventArgs e)
+        {
+            Restore();
         }
 
         private void FileEngine_Loaded(object sender, RoutedEventArgs e)

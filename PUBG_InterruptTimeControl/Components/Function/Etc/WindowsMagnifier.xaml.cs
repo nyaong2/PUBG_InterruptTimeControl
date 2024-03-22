@@ -38,10 +38,8 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             var value = Util.Reg.Read(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "SpeechSpeed");
             Label_CurrentValue.Content = (String.IsNullOrEmpty(value)) ? "없음" : value;
         }
-        #endregion
 
-        #region Handler
-        private void Button_Apply_Click(object sender, RoutedEventArgs e)
+        private void MagnifierSpeedApply()
         {
             if (String.IsNullOrEmpty(TextBox_SpeechSpeed.Text))
             {
@@ -49,31 +47,60 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
                 return;
             }
             if (Util.Reg.Write(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "SpeechSpeed", TextBox_SpeechSpeed.Text, Util.Reg.RegValueKind.DWORD))
+            {
                 Label_CurrentValue.Content = TextBox_SpeechSpeed.Text;
-        }
+                msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, Label_CurrentValue.Content + "로 적용이 완료되었습니다.");
+            }
 
-        private void Buttn_Restore_Click(object sender, RoutedEventArgs e)
+        }
+        private void MagnifierSpeedRestore()
         {
             Util.Reg.DeleteSubKey(@"HKEY_CURRENT_USER\Software\Microsoft", "ScreenMagnifier");
             GetCurrentReg();
-        }
 
-        private void Button_DefaultRegAdd_Click(object sender, RoutedEventArgs e)
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+        }
+        
+        private void DefaultRegAdd()
         {
             Util.Reg.Write(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "MagnifierUIWindowDeltaX", "150", Util.Reg.RegValueKind.DWORD);
             Util.Reg.Write(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "MagnifierUIWindowDeltaY", "150", Util.Reg.RegValueKind.DWORD);
             Util.Reg.Write(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "MagnifierUIWindowMinimized", "0", Util.Reg.RegValueKind.DWORD);
             Util.Reg.Write(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "RunningState", "0", Util.Reg.RegValueKind.DWORD);
             Util.Reg.Write(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "SpeechVoice", "Microsoft Heami - Korean (Korean)", Util.Reg.RegValueKind.SZ);
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
         }
 
-        private void Button_DefaultRegDel_Click(object sender, RoutedEventArgs e)
+        private void DefaultRegRemove() 
         {
             Util.Reg.Delete(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "MagnifierUIWindowDeltaX");
             Util.Reg.Delete(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "MagnifierUIWindowDeltaY");
             Util.Reg.Delete(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "MagnifierUIWindowMinimized");
             Util.Reg.Delete(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "RunningState");
             Util.Reg.Delete(@"HKEY_CURRENT_USER\Software\Microsoft\ScreenMagnifier", "SpeechVoice");
+            msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "원상복구 되었습니다.");
+        }
+        #endregion
+
+        #region Handler
+        private void Button_Apply_Click(object sender, RoutedEventArgs e)
+        {
+            MagnifierSpeedApply();
+        }
+
+        private void Buttn_Restore_Click(object sender, RoutedEventArgs e)
+        {
+            MagnifierSpeedRestore();
+        }
+
+        private void Button_DefaultRegAdd_Click(object sender, RoutedEventArgs e)
+        {
+            DefaultRegAdd();
+        }
+
+        private void Button_DefaultRegDel_Click(object sender, RoutedEventArgs e)
+        {
+            DefaultRegRemove();
         }
         #endregion
     }
