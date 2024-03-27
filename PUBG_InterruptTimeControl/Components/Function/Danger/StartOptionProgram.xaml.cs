@@ -110,6 +110,11 @@ namespace PUBG_InterruptTimeControl.Components.Function.Danger
 
             try
             {
+                var movePath = regServerPath + @"\TslGame_BE2.exe";
+
+                //이미 기존 원본파일명이 변경되어있는 파일이 있는 경우 제거.
+                if (File.Exists(movePath))
+                    File.Delete(movePath);
                 //기존 원본파일 파일명 변경
                 File.Move(bePath, regServerPath + @"\TslGame_BE2.exe");
                 // 시작옵션 프로그램 복사

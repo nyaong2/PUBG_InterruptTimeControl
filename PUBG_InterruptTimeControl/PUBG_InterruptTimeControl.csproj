@@ -171,12 +171,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Components\Function\Danger\DatChange.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Danger\FileEngine.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Components\Function\Danger\StartOptionProgram.xaml">
       <SubType>Designer</SubType>
