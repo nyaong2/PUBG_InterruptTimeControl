@@ -2,20 +2,10 @@
 using PUBG_InterruptTimeControl.Components.Modal.Action;
 using PUBG_InterruptTimeControl.Service.Msg;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PUBG_InterruptTimeControl.Components.Function.Etc
 {
@@ -46,6 +36,7 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
             SetLabelMouseBufferReg();
             SetLabelCurrentNetworkNagle();
             SetLabelGameDVRReg();
+
         }
 
         #region Function
@@ -110,11 +101,12 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
 
         private void SetLabelCurrentNetworkNagle()
         {
-            Label_CurrentNagle.Content = Util.Reg.ExistKey(findNetworkInterfaceRegPath, networkNagleRegName) == true ? "적용" : "미적용";
+           Label_CurrentNagle.Content = Util.Reg.ExistKey(findNetworkInterfaceRegPath, networkNagleRegName) ? "적용" : "미적용";
         }
         private void NetworkNagleDisable()
         {
             Util.Reg.Write(findNetworkInterfaceRegPath, networkNagleRegName, "1", Util.Reg.RegValueKind.DWORD);
+
             Label_CurrentNagle.Content = "적용";
             msgService.Show(MsgEnum.Category.Info, MsgEnum.CloseType.Close, "적용 되었습니다.");
 
@@ -143,14 +135,16 @@ namespace PUBG_InterruptTimeControl.Components.Function.Etc
                 {
                     using (var interfaceKey = interfacesKey.OpenSubKey(name))
                     {
-                        foreach(var regName in interfaceKey.GetValueNames())
-                        {
-                            if(regName.ToLower().Equals("dhcpipaddress"))
-                            {
-                                if (interfaceKey.GetValue(regName).Equals(ipv4Address))
-                                    return interfaceKey.Name;
-                            }
+                        var insideIP = interfaceKey.GetValue("dhcpipaddress");
+                        if (insideIP != null && insideIP.Equals(ipv4Address))
+                            return interfaceKey.Name;
+                        else
+                        { 
+                            var outsideIP = interfaceKey.GetValue("ipaddress") as string[]; //공유기가 아닌 일반 유동ip인 경우
+                            if (outsideIP != null && outsideIP[0].Equals(ipv4Address))
+                                return interfaceKey.Name;
                         }
+                        
                     }
                 }
             }

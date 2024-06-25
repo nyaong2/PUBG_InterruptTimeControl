@@ -150,21 +150,14 @@ class Util
         internal static bool ExistKey(string regPath, in string SubKey)
         {
             bool result = false;
-            string regPathTemp = regPath; // Temp 쓴 이유 : 이것을 2번쓰는 함수의 경우 RegPathKeyCreate 시 regPath 앞에 루트위치가 지워져서 temp를 통해 그것을 방지
-
-            RegistryKey rk = RegPathCreate(ref regPathTemp);
-
+            RegistryKey rk = RegPathCreate(ref regPath);
             if (rk == null)
                 return result;
 
             try
             {
-                var openSubKey = rk.OpenSubKey(regPathTemp, true);
-                if (openSubKey != null) // null이면 값이 없음 null이 아니면 값이 있음
-                {
-                    if (openSubKey.GetValue(SubKey) != null)
-                        result = true;
-                }
+                if (rk.OpenSubKey(regPath, true).GetValue(SubKey) != null)
+                    result = true;
             }
             catch { }
             finally
